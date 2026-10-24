@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: auckland-rail-api
+    env: docker
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: AT_SUBSCRIPTION_KEY
+        sync: false
+      - key: GTFS_ZIP_PATH
+        value: /app/backend/data/gtfs.zip
+      - key: FRONTEND_ORIGIN
+        value: https://auckland-rail.pages.dev
