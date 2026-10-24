@@ -1,13 +1,18 @@
 services:
   - type: web
     name: auckland-rail-api
-    env: docker
+    env: python
     plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
+      - key: PYTHON_VERSION
+        value: "3.14.0"
       - key: AT_SUBSCRIPTION_KEY
         sync: false
-      - key: GTFS_ZIP_PATH
-        value: /app/backend/data/gtfs.zip
       - key: FRONTEND_ORIGIN
         value: https://auckland-rail.pages.dev
+      - key: GTFS_ZIP_PATH
+        value: ./data/gtfs.zip
